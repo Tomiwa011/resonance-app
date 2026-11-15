@@ -1,0 +1,211 @@
+// src/data/products.js
+// Images live in /public/images/, first image in each array is the main one.
+
+export const products = [
+  {
+    id: "1",
+    slug: "xx99-mark-ii-headphones",
+    name: "XX99 Mark II Headphones",
+    category: "headphones",
+    brand: "Resonance",
+    price: 2999,
+    isNew: true,
+    rating: 4.8,
+    stock: 12,
+    description:
+      "The new XX99 Mark II headphones is the pinnacle of pristine audio. It redefines your premium headphone experience by reproducing the balanced depth and precision of studio-quality sound.",
+    features: [
+      "Featuring a genuine leather head strap and premium earcups, these headphones deliver superior comfort for those who like to enjoy endless listening. It includes intuitive controls designed for any situation.",
+      "The advanced Active Noise Cancellation with built-in equalizer allows you to experience your audio world on your terms. It lets you enjoy your audio in peace, but quickly interact with your surroundings when you need to.",
+    ],
+    specs: [
+      { label: "Type", value: "Over-ear, closed-back" },
+      { label: "Connectivity", value: "Bluetooth 5.0, 3.5mm wired" },
+      { label: "Noise cancellation", value: "Active" },
+      { label: "Battery life", value: "Up to 30 hours" },
+    ],
+    inTheBox: [
+      { item: "Headphone unit", quantity: 1 },
+      { item: "Replacement earcups", quantity: 2 },
+      { item: "User manual", quantity: 1 },
+      { item: "3.5mm audio cable", quantity: 1 },
+      { item: "Travel bag", quantity: 1 },
+    ],
+    images: [
+      "/images/xx99-mark-ii-1.jpg",
+      "/images/xx99-mark-ii-2.jpg",
+      "/images/xx99-mark-ii-3.jpg",
+    ],
+  },
+  {
+    id: "2",
+    slug: "xx99-mark-i-headphones",
+    name: "XX99 Mark I Headphones",
+    category: "headphones",
+    brand: "Resonance",
+    price: 1750,
+    isNew: false,
+    rating: 4.6,
+    stock: 8,
+    description:
+      "As the gold standard for headphones, the classic XX99 Mark I offers detailed and accurate audio reproduction for audiophiles, mixing engineers, and music aficionados alike in studios and on the go.",
+    features: [
+      "As the headphones all others are measured against, the XX99 Mark I demonstrates over five decades of audio expertise, redefining the critical listening experience.",
+      "The stylish yet durable construction is built for everyday use, and the detachable cable makes them easy to carry and easy to replace.",
+    ],
+    specs: [
+      { label: "Type", value: "Over-ear, semi-open" },
+      { label: "Connectivity", value: "3.5mm wired" },
+      { label: "Noise cancellation", value: "Passive" },
+      { label: "Impedance", value: "32 ohms" },
+    ],
+    inTheBox: [
+      { item: "Headphone unit", quantity: 1 },
+      { item: "User manual", quantity: 1 },
+      { item: "3.5mm audio cable", quantity: 1 },
+      { item: "Travel bag", quantity: 1 },
+    ],
+    images: [
+      "/images/xx99-mark-i-1.jpg",
+      "/images/xx99-mark-i-2.jpg",
+      "/images/xx99-mark-i-3.jpg",
+    ],
+  },
+  {
+    id: "3",
+    slug: "xx59-headphones",
+    name: "XX59 Headphones",
+    category: "headphones",
+    brand: "Resonance",
+    price: 899,
+    isNew: false,
+    rating: 4.5,
+    stock: 20,
+    description:
+      "Enjoy your audio almost anywhere and customize it to your specific tastes with the XX59 headphones. The stylish yet durable versatile wireless headset is a brilliant companion at home or on the move.",
+    features: [
+      "These headphones have been created from durable, high-quality materials tough enough to take anywhere. Its compact folding design fuses comfort and minimalist style making it perfect for travel.",
+      "This headset features a pair of built-in microphones for clear, hands-free calling when paired with a compatible smartphone. You can use them all day thanks to an impressive 30-hour battery life that can be rapidly recharged via USB-C.",
+    ],
+    specs: [
+      { label: "Type", value: "On-ear, foldable" },
+      { label: "Connectivity", value: "Bluetooth 5.0, USB-C" },
+      { label: "Battery life", value: "Up to 30 hours" },
+      { label: "Microphone", value: "Built-in, dual" },
+    ],
+    inTheBox: [
+      { item: "Headphone unit", quantity: 1 },
+      { item: "User manual", quantity: 1 },
+      { item: "USB-C charging cable", quantity: 1 },
+    ],
+    images: [
+      "/images/xx59-1.jpg",
+      "/images/xx59-2.jpg",
+      "/images/xx59-3.jpg",
+    ],
+  },
+  {
+    id: "4",
+    slug: "zx9-speaker",
+    name: "ZX9 Speaker",
+    category: "speakers",
+    brand: "Resonance",
+    price: 4500,
+    isNew: true,
+    rating: 4.9,
+    stock: 5,
+    description:
+      "Upgrade your sound system with the all new ZX9 active speaker. It's a bookshelf speaker system that offers truly wireless connectivity -- creating new possibilities for more pleasing and practical audio setups.",
+    features: [
+      "Connect via Bluetooth or nearly any wired source. This speaker features optical, digital coaxial, USB Type-B, stereo RCA, and stereo XLR inputs, allowing you to have up to five wired source devices connected for easy switching. Improved bluetooth technology offers near lossless audio quality at up to 328ft (100m).",
+      "Discover clear, more natural sounding highs than the competition with ZX9's signature planar diaphragm tweeter. Equally important is its powerful room-shaking bass courtesy of a 6.5\" aluminum alloy bass unit. You'll be able to enjoy equal sound quality whether in a large room or small den.",
+    ],
+    specs: [
+      { label: "Type", value: "Active bookshelf" },
+      { label: "Connectivity", value: "Bluetooth, optical, USB-B, RCA, XLR" },
+      { label: "Wireless range", value: "Up to 100m" },
+      { label: "Bass unit", value: "6.5in aluminum alloy" },
+    ],
+    inTheBox: [
+      { item: "Speaker unit", quantity: 2 },
+      { item: "Speaker cloth panel", quantity: 2 },
+      { item: "User manual", quantity: 1 },
+      { item: "Power cable", quantity: 1 },
+      { item: "Optical cable", quantity: 1 },
+    ],
+    images: [
+      "/images/zx9-1.jpg",
+      "/images/zx9-2.jpg",
+      "/images/zx9-3.jpg",
+    ],
+  },
+  {
+    id: "5",
+    slug: "zx7-speaker",
+    name: "ZX7 Speaker",
+    category: "speakers",
+    brand: "Resonance",
+    price: 3500,
+    isNew: false,
+    rating: 4.7,
+    stock: 7,
+    description:
+      "Stream high quality sound wirelessly with minimal to no loss. The ZX7 speaker uses high-end audiophile components that represents the top of the line powered speakers for home or studio use.",
+    features: [
+      "Reap the advantages of a flat diaphragm tweeter cone. This provides a fast response rate and excellent high frequencies that lower tiered bookshelf speakers cannot provide.",
+      "The woofers are constructed with a rigid cone that keeps bass tight and controlled, even at high volume, so you hear the music the way it was recorded.",
+    ],
+    specs: [
+      { label: "Type", value: "Powered bookshelf" },
+      { label: "Connectivity", value: "Bluetooth, optical, RCA" },
+      { label: "Wireless range", value: "Up to 80m" },
+      { label: "Bass unit", value: "5in woven fiber" },
+    ],
+    inTheBox: [
+      { item: "Speaker unit", quantity: 2 },
+      { item: "Speaker cloth panel", quantity: 2 },
+      { item: "User manual", quantity: 1 },
+      { item: "Power cable", quantity: 1 },
+    ],
+    images: [
+      "/images/zx7-1.jpg",
+      "/images/zx7-2.jpg",
+      "/images/zx7-3.jpg",
+    ],
+  },
+  {
+    id: "6",
+    slug: "yx1-wireless-earphones",
+    name: "YX1 Wireless Earphones",
+    category: "earphones",
+    brand: "Resonance",
+    price: 599,
+    isNew: true,
+    rating: 4.4,
+    stock: 30,
+    description:
+      "Tailor your listening experience with bespoke dynamic drivers from the new YX1 Wireless Earphones. Enjoy incredible high-fidelity sound even in noisy environments with its active noise cancellation feature.",
+    features: [
+      "Experience unrivalled stereo sound thanks to innovative acoustic technology. With improved ergonomics designed for full day wearing, these revolutionary earphones have been finely crafted to provide you with the perfect fit.",
+      "The charging case keeps the earphones powered on the move, giving you hours of extra listening time before you need to plug in again.",
+    ],
+    specs: [
+      { label: "Type", value: "True wireless in-ear" },
+      { label: "Connectivity", value: "Bluetooth 5.2" },
+      { label: "Noise cancellation", value: "Active" },
+      { label: "Battery life", value: "6 hours (24 with case)" },
+    ],
+    inTheBox: [
+      { item: "Earphone unit", quantity: 2 },
+      { item: "Multi-size earplugs", quantity: 6 },
+      { item: "User manual", quantity: 1 },
+      { item: "USB-C charging cable", quantity: 1 },
+      { item: "Travel pouch", quantity: 1 },
+    ],
+    images: [
+      "/images/yx1-1.jpg",
+      "/images/yx1-2.jpg",
+      "/images/yx1-3.jpg",
+    ],
+  },
+];

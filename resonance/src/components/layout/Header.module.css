@@ -1,0 +1,94 @@
+.header {
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  height: 72px;
+  justify-content: space-between;
+  padding: 0 clamp(20px, 5vw, 72px);
+}
+
+.logo {
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: 25px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.navigation {
+  align-items: center;
+  display: flex;
+  gap: clamp(16px, 2.5vw, 36px);
+}
+
+.navLink {
+  color: var(--text);
+  font-size: 13px;
+  text-decoration: none;
+  transition: opacity 150ms ease;
+}
+
+.navLink:hover {
+  opacity: 0.65;
+}
+
+.active {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.cartButton {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--text);
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  padding: 8px;
+  position: relative;
+}
+
+.cartButton svg {
+  height: 22px;
+  width: 22px;
+}
+
+.cartCount {
+  align-items: center;
+  background: var(--accent);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  font-size: 10px;
+  height: 17px;
+  justify-content: center;
+  min-width: 17px;
+  padding: 0 4px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+@media (max-width: 720px) {
+  .header {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 72px;
+    padding-bottom: 14px;
+    padding-top: 14px;
+    row-gap: 14px;
+  }
+
+  .navigation {
+    flex-basis: 100%;
+    justify-content: space-between;
+    order: 1;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
+  .navLink {
+    white-space: nowrap;
+  }
+}

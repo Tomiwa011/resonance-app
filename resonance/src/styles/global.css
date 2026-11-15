@@ -1,0 +1,30 @@
+:root {
+  --bg: #f7f6f2;
+  --text: #22211f;
+  --border: #dedcd5;
+  --radius-card: 8px;
+  --accent: #2f6b4f;
+  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Fraunces', serif;
+
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+}

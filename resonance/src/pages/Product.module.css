@@ -1,0 +1,301 @@
+.page {
+  padding: 48px clamp(20px, 5vw, 72px) 80px;
+}
+
+.message {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0 auto;
+  max-width: 720px;
+  min-height: 280px;
+  padding: 72px 24px;
+}
+
+.message h1,
+.message p {
+  margin: 0;
+}
+
+.homeLink {
+  color: var(--text);
+  text-underline-offset: 4px;
+}
+
+.topSection {
+  align-items: start;
+  display: grid;
+  gap: clamp(32px, 6vw, 88px);
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+}
+
+.mainImageBox {
+  align-items: center;
+  background: #f2f0eb;
+  border-radius: var(--radius-card);
+  display: flex;
+  height: 460px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 32px;
+}
+
+.mainImage {
+  height: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
+.thumbnails {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 12px;
+}
+
+.thumbnailButton {
+  background: #f2f0eb;
+  border: 2px solid transparent;
+  border-radius: var(--radius-card);
+  cursor: pointer;
+  height: 112px;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.thumbnailButton img {
+  height: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
+.thumbnailButton:hover,
+.thumbnailButton:focus-visible {
+  border-color: var(--accent);
+}
+
+.selectedThumbnail {
+  border-color: var(--accent);
+}
+
+.details {
+  align-self: center;
+}
+
+.newTag {
+  color: #77756f;
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.details h1 {
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.1;
+  margin: 0 0 20px;
+}
+
+.description {
+  color: #77756f;
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 0 0 24px;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 10px;
+}
+
+.stockHint {
+  color: #8b5c2e;
+  font-size: 13px;
+  margin: 0 0 18px;
+}
+
+.purchaseRow {
+  align-items: stretch;
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.quantityControl {
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  display: flex;
+}
+
+.quantityControl button {
+  background: transparent;
+  border: 0;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 20px;
+  height: 48px;
+  width: 42px;
+}
+
+.quantityControl button:disabled {
+  color: #aaa8a1;
+  cursor: not-allowed;
+}
+
+.quantityControl output {
+  min-width: 28px;
+  text-align: center;
+}
+
+.addButton {
+  background: var(--accent);
+  border: 0;
+  border-radius: var(--radius-card);
+  color: #fff;
+  cursor: pointer;
+  flex: 1;
+  font: inherit;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  padding: 0 20px;
+  text-transform: uppercase;
+  transition: background-color 160ms ease;
+}
+
+.addButton:hover {
+  background: #234f3a;
+}
+
+.information {
+  margin-top: 72px;
+}
+
+.tabList {
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 32px;
+}
+
+.tabList button {
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: #77756f;
+  cursor: pointer;
+  font: inherit;
+  padding: 0 0 14px;
+}
+
+.tabList button:hover,
+.tabList .activeTab {
+  border-bottom-color: var(--accent);
+  color: var(--text);
+}
+
+.tabPanel {
+  color: #62605b;
+  line-height: 1.8;
+  max-width: 850px;
+  padding: 24px 0;
+}
+
+.specsTable {
+  border-collapse: collapse;
+  text-align: left;
+  width: 100%;
+}
+
+.specsTable th,
+.specsTable td {
+  border-bottom: 1px solid var(--border);
+  padding: 12px 16px 12px 0;
+}
+
+.specsTable th {
+  color: var(--text);
+  font-weight: 500;
+  width: 35%;
+}
+
+.boxList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.boxList li {
+  margin: 8px 0;
+}
+
+.boxList li span {
+  color: var(--accent);
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.related {
+  margin-top: 48px;
+}
+
+.related h2 {
+  margin: 0 0 24px;
+}
+
+.relatedGrid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 800px) {
+  .topSection {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mainImageBox {
+    height: 380px;
+  }
+
+  .relatedGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .page {
+    padding-bottom: 56px;
+    padding-top: 32px;
+  }
+
+  .mainImageBox {
+    height: 300px;
+  }
+
+  .thumbnailButton {
+    height: 88px;
+  }
+
+  .purchaseRow {
+    flex-direction: column;
+  }
+
+  .quantityControl {
+    align-self: flex-start;
+  }
+
+  .addButton {
+    min-height: 48px;
+  }
+
+  .tabList {
+    gap: 20px;
+  }
+
+  .relatedGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

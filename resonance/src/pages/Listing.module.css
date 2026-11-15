@@ -1,0 +1,152 @@
+.page {
+  padding: 48px clamp(20px, 5vw, 72px) 80px;
+}
+
+.title {
+  margin: 0 0 32px;
+}
+
+.layout {
+  display: grid;
+  gap: 48px;
+  grid-template-columns: 240px minmax(0, 1fr);
+}
+
+.results {
+  min-width: 0;
+}
+
+.sidebar {
+  align-self: start;
+}
+
+.filterGroup {
+  border: 0;
+  margin: 0 0 28px;
+  min-width: 0;
+  padding: 0;
+}
+
+.filterTitle {
+  color: var(--text);
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 14px;
+  padding: 0;
+}
+
+.range {
+  accent-color: var(--text);
+  display: block;
+  width: 100%;
+}
+
+.priceValue {
+  color: #77756f;
+  display: block;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.brandOption {
+  align-items: center;
+  color: #77756f;
+  display: flex;
+  font-size: 13px;
+  gap: 9px;
+  margin: 10px 0;
+}
+
+.brandOption input {
+  accent-color: var(--text);
+  margin: 0;
+}
+
+.clearButton {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  padding: 9px 12px;
+}
+
+.clearButton:hover {
+  background: #fff;
+}
+
+.sortBar {
+  align-items: center;
+  color: #77756f;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 13px;
+  gap: 16px;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.sortControl {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+}
+
+.sortControl select {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font: inherit;
+  padding: 8px 10px;
+}
+
+.productGrid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.emptyState {
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  min-height: 220px;
+  padding: 24px;
+  text-align: center;
+}
+
+.emptyState p {
+  color: #77756f;
+  margin: 0;
+}
+
+@media (max-width: 800px) {
+  .layout {
+    gap: 28px;
+    grid-template-columns: 180px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding-bottom: 56px;
+    padding-top: 32px;
+  }
+
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .productGrid {
+    gap: 16px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

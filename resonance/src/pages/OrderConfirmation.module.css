@@ -1,0 +1,23 @@
+.page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 420px;
+  padding: 48px 20px;
+  text-align: center;
+}
+
+.page h1 {
+  margin: 0 0 12px;
+}
+
+.page p {
+  color: #77756f;
+  margin: 0 0 24px;
+}
+
+.page a {
+  color: var(--text);
+  text-underline-offset: 4px;
+}
