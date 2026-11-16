@@ -1,5 +1,4 @@
-const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:4000/api'
-
+const BASE_URL = import.meta.env.VITE_API_URL ?? '/api'
 // Returns the parsed JSON, or null if the server says 404.
 export async function apiGet(path) {
   const response = await fetch(`${BASE_URL}${path}`)

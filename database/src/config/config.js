@@ -16,6 +16,7 @@ if (!Number.isInteger(port) || port < 1 || port > 65535) {
 
 export const config = {
   port,
-  clientOrigin: required('CLIENT_ORIGIN'),
+  // Only needed when the frontend runs on a different address (local development).
+  clientOrigin: process.env.CLIENT_ORIGIN || null,
   databaseUrl: required('DATABASE_URL'),
 };
