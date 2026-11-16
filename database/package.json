@@ -1,25 +1,22 @@
 {
   "name": "resonance-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Resonance store API",
   "main": "src/server.js",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node --watch src/server.js",
     "start": "node src/server.js",
     "seed": "node db/seed.js"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
-  "type": "module",
   "dependencies": {
     "cors": "^2.8.6",
     "dotenv": "^18.0.10",
     "express": "^5.3.0",
-    "pg": "^8.23.1",
-    "engines": {
-  "node": ">=20"
-}
+    "pg": "^8.11.0"
   }
 }
