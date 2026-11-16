@@ -73,16 +73,47 @@
   padding: calc(20px + env(safe-area-inset-top)) 24px
     calc(24px + env(safe-area-inset-bottom));
   position: fixed;
+  opacity: 0;
+  transform: translateX(100%);
+  transition:
+    opacity 240ms ease,
+    transform 240ms ease,
+    display 240ms allow-discrete,
+    overlay 240ms allow-discrete;
   width: 100%;
 }
 
 .mobileMenu[open] {
   display: flex;
   flex-direction: column;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@starting-style {
+  .mobileMenu[open] {
+    opacity: 0;
+    transform: translateX(100%);
+  }
 }
 
 .mobileMenu::backdrop {
   background: var(--bg);
+  opacity: 0;
+  transition:
+    opacity 240ms ease,
+    display 240ms allow-discrete,
+    overlay 240ms allow-discrete;
+}
+
+.mobileMenu[open]::backdrop {
+  opacity: 1;
+}
+
+@starting-style {
+  .mobileMenu[open]::backdrop {
+    opacity: 0;
+  }
 }
 
 .mobileMenuHeader {
@@ -166,5 +197,12 @@
 
   .cartButton {
     margin-left: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobileMenu,
+  .mobileMenu::backdrop {
+    transition-duration: 0.01ms;
   }
 }
