@@ -121,9 +121,11 @@ function Product() {
           <h1>{product.name}</h1>
           <p className={styles.description}>{product.description}</p>
           <p className={styles.price}>{formatPrice(product.price)}</p>
-          {product.stock <= 5 && (
+          {product.stock === 0 ? (
+            <p className={styles.stockHint}>Out of stock</p>
+          ) : product.stock <= 5 ? (
             <p className={styles.stockHint}>Only {product.stock} left</p>
-          )}
+          ) : null}
 
           <div className={styles.purchaseRow}>
             <div
@@ -156,9 +158,10 @@ function Product() {
             <button
               className={styles.addButton}
               onClick={handleAddToCart}
+              disabled={product.stock < 1}
               type="button"
             >
-              Add to cart
+              {product.stock < 1 ? "Out of stock" : "Add to cart"}
             </button>
           </div>
         </div>

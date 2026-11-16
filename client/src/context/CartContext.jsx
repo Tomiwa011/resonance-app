@@ -47,7 +47,7 @@ const reducer = (items, action) => {
     case 'ADD': {
       const productId = Number(action.productId)
       const quantity = toWholeNumber(action.quantity)
-      const max = action.max ?? Infinity
+      const max = action.max == null ? Infinity : toWholeNumber(action.max)
 
       if (!Number.isInteger(productId) || productId < 1 || quantity < 1 || max < 1) {
         return items
@@ -65,15 +65,18 @@ const reducer = (items, action) => {
       return [...items, { productId, quantity: Math.min(max, quantity) }]
     }
     case 'SET_QTY': {
+      const productId = Number(action.productId)
       const quantity = toWholeNumber(action.quantity)
-      const max = action.max ?? Infinity
+      const max = action.max == null ? Infinity : toWholeNumber(action.max)
 
-      if (quantity < 1) {
-        return items.filter((item) => item.productId !== action.productId)
+      if (!Number.isInteger(productId) || productId < 1) return items
+
+      if (quantity < 1 || max < 1) {
+        return items.filter((item) => item.productId !== productId)
       }
 
       return items.map((item) =>
-        item.productId === action.productId
+        item.productId === productId
           ? { ...item, quantity: Math.min(max, quantity) }
           : item,
       )
@@ -145,28 +148,36 @@ export const useCart = () => {
 // eslint-disable-next-line react-refresh/only-export-components
 export const useCartDetails = () => {
   const { items } = useCart()
-  const [productMap, setProductMap] = useState({})
-  const [isLoading, setIsLoading] = useState(false)
+  const idsKey = items.map((item) => item.productId).join(',')
+  const [loadedProducts, setLoadedProducts] = useState({
+    idsKey: '',
+    productMap: {},
+  })
 
   // Only refetch when the SET of products changes, not when a quantity changes.
-  const idsKey = items.map((item) => item.productId).join(',')
-
   useEffect(() => {
     if (!idsKey) return undefined
 
     let isCurrent = true
-    setIsLoading(true)
 
     getProductsByIds(idsKey.split(',').map(Number)).then((products) => {
       if (!isCurrent) return
-      setProductMap(Object.fromEntries(products.map((product) => [product.id, product])))
-      setIsLoading(false)
+      setLoadedProducts({
+        idsKey,
+        productMap: Object.fromEntries(products.map((product) => [product.id, product])),
+      })
     })
 
     return () => {
       isCurrent = false
     }
   }, [idsKey])
+
+  const isLoading = Boolean(idsKey) && loadedProducts.idsKey !== idsKey
+  const productMap = useMemo(
+    () => (loadedProducts.idsKey === idsKey ? loadedProducts.productMap : {}),
+    [loadedProducts, idsKey],
+  )
 
   return useMemo(() => {
     const lines = items.flatMap((item) => {
@@ -180,7 +191,7 @@ export const useCartDetails = () => {
     return {
       lines,
       isLoading,
-      itemCount: items.reduce((total, item) => total + item.quantity, 0),
+      itemCount: lines.reduce((total, line) => total + line.quantity, 0),
       subtotal: lines.reduce((total, line) => total + line.lineTotal, 0),
     }
   }, [items, productMap, isLoading])

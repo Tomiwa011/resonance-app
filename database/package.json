@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "node --watch src/server.js",
     "start": "node src/server.js",
+    "db:setup": "node db/setup.js",
     "seed": "node db/seed.js"
   },
   "license": "ISC",

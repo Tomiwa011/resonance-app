@@ -1,5 +1,10 @@
 import { getHealth } from '../services/health.service.js';
 
-export function healthController(_req, res) {
-  res.status(200).json(getHealth());
+export async function healthController(_req, res) {
+  try {
+    res.status(200).json(await getHealth());
+  } catch (error) {
+    console.error('Health check failed:', error);
+    res.status(503).json({ status: 'error', database: 'disconnected' });
+  }
 }

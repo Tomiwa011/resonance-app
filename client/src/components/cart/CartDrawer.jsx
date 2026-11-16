@@ -6,7 +6,7 @@ import styles from './CartDrawer.module.css'
 
 function CartDrawer() {
   const { isOpen, closeCart, setQuantity, removeItem } = useCart()
-  const { lines, itemCount, subtotal } = useCartDetails()
+  const { lines, isLoading, itemCount, subtotal } = useCartDetails()
   const closeButtonRef = useRef(null)
 
   useEffect(() => {
@@ -60,7 +60,11 @@ function CartDrawer() {
           </button>
         </header>
 
-        {lines.length === 0 ? (
+        {isLoading ? (
+          <p className={styles.emptyState} role="status">
+            Loading your cart...
+          </p>
+        ) : lines.length === 0 ? (
           <div className={styles.emptyState}>
             <p>Your cart is empty.</p>
             <Link className={styles.continueButton} onClick={closeCart} to="/">

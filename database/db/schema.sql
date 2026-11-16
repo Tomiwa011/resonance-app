@@ -1,3 +1,20 @@
+CREATE TABLE IF NOT EXISTS products (
+  id          SERIAL PRIMARY KEY,
+  slug        TEXT NOT NULL UNIQUE,
+  name        TEXT NOT NULL,
+  category    TEXT NOT NULL,
+  brand       TEXT NOT NULL,
+  price       INTEGER NOT NULL CHECK (price >= 0),
+  is_new      BOOLEAN NOT NULL DEFAULT FALSE,
+  rating      NUMERIC(3, 2) NOT NULL CHECK (rating >= 0 AND rating <= 5),
+  stock       INTEGER NOT NULL DEFAULT 0 CHECK (stock >= 0),
+  description TEXT NOT NULL,
+  features    JSONB NOT NULL DEFAULT '[]'::jsonb,
+  specs       JSONB NOT NULL DEFAULT '[]'::jsonb,
+  in_the_box  JSONB NOT NULL DEFAULT '[]'::jsonb,
+  images      JSONB NOT NULL DEFAULT '[]'::jsonb
+);
+
 CREATE TABLE IF NOT EXISTS orders (
   id            SERIAL PRIMARY KEY,
   order_number  TEXT NOT NULL UNIQUE,
