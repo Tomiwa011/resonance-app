@@ -3,20 +3,66 @@ import { pool } from '../config/db.js';
 import { AppError } from '../utils/AppError.js';
 
 // Keep this in sync with the delivery fee your checkout page shows.
-const DELIVERY_FEE = 5000;
+export const DELIVERY_FEE = 5000;
 
 function makeOrderNumber() {
   return `RS-${randomBytes(4).toString('hex').toUpperCase()}`;
 }
 
-// customer: { name, email, phone, address, city, state, notes }
-// items: [{ productId, quantity }]   (already validated by the controller)
-export async function createOrder({ customer, items }) {
-  // Merge duplicate lines so the same product can't be listed twice.
+// Merges duplicate lines, so the same product can't be listed twice.
+// [{ productId: 4, quantity: 1 }, { productId: 4, quantity: 2 }] -> Map { 4 => 3 }
+export function mergeItems(items) {
   const wanted = new Map();
   for (const item of items) {
     wanted.set(item.productId, (wanted.get(item.productId) ?? 0) + item.quantity);
   }
+  return wanted;
+}
+
+// Works out prices and checks stock. No database access, so it's easy to test.
+// `wanted` is a Map of productId -> quantity.
+// `products` is a list of { id, name, price, stock } rows from the database.
+export function priceOrder(wanted, products) {
+  const byId = new Map(products.map((product) => [product.id, product]));
+  const lines = [];
+
+  for (const [productId, quantity] of wanted) {
+    const product = byId.get(productId);
+
+    if (!product) {
+      throw new AppError(404, `Product ${productId} no longer exists`);
+    }
+    if (product.stock < quantity) {
+      throw new AppError(
+        409,
+        product.stock === 0
+          ? `${product.name} is out of stock`
+          : `Only ${product.stock} of ${product.name} left`,
+      );
+    }
+
+    lines.push({
+      productId,
+      name: product.name,
+      unitPrice: product.price,
+      quantity,
+    });
+  }
+
+  const subtotal = lines.reduce((sum, line) => sum + line.unitPrice * line.quantity, 0);
+
+  return {
+    lines,
+    subtotal,
+    deliveryFee: DELIVERY_FEE,
+    total: subtotal + DELIVERY_FEE,
+  };
+}
+
+// customer: { name, email, phone, address, city, state, notes }
+// items: [{ productId, quantity }]   (already validated)
+export async function createOrder({ customer, items }) {
+  const wanted = mergeItems(items);
   const productIds = [...wanted.keys()];
 
   const client = await pool.connect();
@@ -31,34 +77,7 @@ export async function createOrder({ customer, items }) {
       [productIds],
     );
 
-    const byId = new Map(products.map((product) => [product.id, product]));
-    const lines = [];
-
-    for (const [productId, quantity] of wanted) {
-      const product = byId.get(productId);
-
-      if (!product) {
-        throw new AppError(404, `Product ${productId} no longer exists`);
-      }
-      if (product.stock < quantity) {
-        throw new AppError(
-          409,
-          product.stock === 0
-            ? `${product.name} is out of stock`
-            : `Only ${product.stock} of ${product.name} left`,
-        );
-      }
-
-      lines.push({
-        productId,
-        name: product.name,
-        unitPrice: product.price,
-        quantity,
-      });
-    }
-
-    const subtotal = lines.reduce((sum, line) => sum + line.unitPrice * line.quantity, 0);
-    const total = subtotal + DELIVERY_FEE;
+    const { lines, subtotal, deliveryFee, total } = priceOrder(wanted, products);
     const orderNumber = makeOrderNumber();
 
     const orderResult = await client.query(
@@ -77,7 +96,7 @@ export async function createOrder({ customer, items }) {
         customer.state,
         customer.notes || null,
         subtotal,
-        DELIVERY_FEE,
+        deliveryFee,
         total,
       ],
     );
@@ -103,7 +122,7 @@ export async function createOrder({ customer, items }) {
       orderNumber,
       status: 'pending',
       subtotal,
-      deliveryFee: DELIVERY_FEE,
+      deliveryFee,
       total,
       createdAt: order.created_at,
       items: lines.map((line) => ({

@@ -11,7 +11,8 @@
     "dev": "node --watch src/server.js",
     "start": "node src/server.js",
     "db:setup": "node db/setup.js",
-    "seed": "node db/seed.js"
+    "seed": "node db/seed.js",
+     "test": "node --test"
   },
   "license": "ISC",
   "dependencies": {
