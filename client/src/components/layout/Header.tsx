@@ -1,4 +1,5 @@
-import { Link, NavLink } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useCart, useCartDetails } from '../../context/useCart'
 import styles from './Header.module.css'
 
@@ -13,6 +14,35 @@ const categories = [
 function Header() {
   const { openCart } = useCart()
   const { itemCount } = useCartDetails()
+  const { pathname } = useLocation()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const menuRef = useRef<HTMLDialogElement>(null)
+
+  useEffect(() => {
+    const menu = menuRef.current
+    if (!menu) return
+
+    if (isMenuOpen && !menu.open) {
+      menu.showModal()
+    } else if (!isMenuOpen && menu.open) {
+      menu.close()
+    }
+  }, [isMenuOpen])
+
+  useEffect(() => {
+    setIsMenuOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    if (!isMenuOpen) return
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [isMenuOpen])
 
   return (
     <header className={styles.header}>
@@ -33,6 +63,26 @@ function Header() {
           </NavLink>
         ))}
       </nav>
+
+      <button
+        aria-controls="mobile-navigation"
+        aria-expanded={isMenuOpen}
+        aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        className={styles.menuButton}
+        onClick={() => setIsMenuOpen((open) => !open)}
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeWidth="1.8"
+        >
+          {isMenuOpen ? <path d="m6 6 12 12M18 6 6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+        </svg>
+      </button>
 
       <button
         className={styles.cartButton}
@@ -60,6 +110,71 @@ function Header() {
           </span>
         )}
       </button>
+
+      <dialog
+        aria-label="Navigation menu"
+        className={styles.mobileMenu}
+        id="mobile-navigation"
+        onClose={() => setIsMenuOpen(false)}
+        ref={menuRef}
+      >
+        <div className={styles.mobileMenuHeader}>
+          <Link
+            className={styles.logo}
+            onClick={() => setIsMenuOpen(false)}
+            to="/"
+          >
+            Resonance
+          </Link>
+          <button
+            aria-label="Close navigation menu"
+            className={styles.closeButton}
+            onClick={() => setIsMenuOpen(false)}
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="1.8"
+            >
+              <path d="m6 6 12 12M18 6 6 18" />
+            </svg>
+          </button>
+        </div>
+        <nav aria-label="Mobile navigation" className={styles.mobileNavigation}>
+          <NavLink
+            className={styles.mobileNavLink}
+            onClick={() => setIsMenuOpen(false)}
+            to="/"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            className={styles.mobileNavLink}
+            onClick={() => setIsMenuOpen(false)}
+            to="/shop"
+          >
+            Shop all
+          </NavLink>
+          {categories.map(({ label, slug }) => (
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? `${styles.mobileNavLink} ${styles.active}`
+                  : styles.mobileNavLink
+              }
+              key={slug}
+              onClick={() => setIsMenuOpen(false)}
+              to={`/category/${slug}`}
+            >
+              {label}
+            </NavLink>
+          ))}
+        </nav>
+      </dialog>
     </header>
   )
 }

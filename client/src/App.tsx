@@ -1,4 +1,5 @@
-import { Route, Routes } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Footer from './components/layout/Footer'
 import Header from './components/layout/Header'
 import CartDrawer from './components/cart/CartDrawer'
@@ -9,6 +10,12 @@ import OrderConfirmation from './pages/OrderConfirmation'
 import Product from './pages/Product'
 
 function App() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
   return (
     <>
       <Header />

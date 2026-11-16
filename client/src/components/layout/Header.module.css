@@ -37,6 +37,85 @@
   text-underline-offset: 5px;
 }
 
+.menuButton,
+.closeButton {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--text);
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  padding: 8px;
+}
+
+.menuButton {
+  display: none;
+}
+
+.menuButton svg,
+.closeButton svg {
+  height: 24px;
+  width: 24px;
+}
+
+.mobileMenu {
+  background: var(--bg);
+  border: 0;
+  color: var(--text);
+  display: none;
+  height: 100vh;
+  height: 100dvh;
+  inset: 0;
+  margin: 0;
+  max-height: none;
+  max-width: none;
+  padding: calc(20px + env(safe-area-inset-top)) 24px
+    calc(24px + env(safe-area-inset-bottom));
+  position: fixed;
+  width: 100%;
+}
+
+.mobileMenu[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileMenu::backdrop {
+  background: var(--bg);
+}
+
+.mobileMenuHeader {
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  min-height: 52px;
+  padding-bottom: 16px;
+}
+
+.mobileNavigation {
+  display: flex;
+  flex-direction: column;
+  margin: auto 0;
+}
+
+.mobileNavLink {
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: clamp(26px, 7vw, 36px);
+  padding: 14px 0;
+  text-decoration: none;
+}
+
+.mobileNavLink:focus-visible,
+.menuButton:focus-visible,
+.closeButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
 .cartButton {
   align-items: center;
   background: transparent;
@@ -72,23 +151,20 @@
 
 @media (max-width: 720px) {
   .header {
-    flex-wrap: wrap;
-    height: auto;
     min-height: 72px;
-    padding-bottom: 14px;
-    padding-top: 14px;
-    row-gap: 14px;
+    padding: 0 20px;
   }
 
   .navigation {
-    flex-basis: 100%;
-    justify-content: space-between;
-    order: 1;
-    overflow-x: auto;
-    padding-bottom: 2px;
+    display: none;
   }
 
-  .navLink {
-    white-space: nowrap;
+  .menuButton {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  .cartButton {
+    margin-left: 8px;
   }
 }
