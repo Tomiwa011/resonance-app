@@ -4,12 +4,20 @@ import ProductCard from "../components/ui/ProductCard.jsx";
 import { getProductsByCategory } from "../data/queries.js";
 import styles from "./Listing.module.css";
 
+const EMPTY_PRODUCTS = [];
+
 function Listing() {
   const { category } = useParams();
-  const [items, setItems] = useState([]);
+  const [productState, setProductState] = useState({
+    category: null,
+    items: [],
+    error: null,
+  });
   const [maxPrice, setMaxPrice] = useState(null);
   const [brands, setBrands] = useState([]);
   const [sort, setSort] = useState("featured");
+  const isLoading = productState.category !== category;
+  const items = isLoading ? EMPTY_PRODUCTS : productState.items;
 
   const categoryName = category
     ? `${category.charAt(0).toUpperCase()}${category.slice(1)}`
@@ -18,14 +26,20 @@ function Listing() {
   useEffect(() => {
     let isCurrentCategory = true;
 
-    getProductsByCategory(category).then((products) => {
-      if (!isCurrentCategory) return;
+    getProductsByCategory(category)
+      .then((products) => {
+        if (!isCurrentCategory) return;
 
-      setMaxPrice(null);
-      setBrands([]);
-      setSort("featured");
-      setItems(products);
-    });
+        setMaxPrice(null);
+        setBrands([]);
+        setSort("featured");
+        setProductState({ category, items: products, error: null });
+      })
+      .catch((error) => {
+        if (!isCurrentCategory) return;
+        console.error("Could not load products", error);
+        setProductState({ category, items: [], error });
+      });
 
     return () => {
       isCurrentCategory = false;
@@ -86,7 +100,7 @@ function Listing() {
             </label>
             <input
               className={styles.range}
-              disabled={items.length === 0}
+              disabled={isLoading || items.length === 0}
               id="max-price"
               max={maxAvailablePrice}
               min="0"
@@ -110,6 +124,7 @@ function Listing() {
                   <input
                     checked={brands.includes(brand)}
                     onChange={() => toggleBrand(brand)}
+                    disabled={isLoading}
                     type="checkbox"
                     value={brand}
                   />
@@ -132,11 +147,14 @@ function Listing() {
         <div className={styles.results}>
           <div className={styles.sortBar}>
             <span>
-              {visible.length} {visible.length === 1 ? "product" : "products"}
+              {isLoading
+                ? "Loading products..."
+                : `${visible.length} ${visible.length === 1 ? "product" : "products"}`}
             </span>
             <label className={styles.sortControl}>
               <span>Sort by</span>
               <select
+                disabled={isLoading}
                 onChange={(event) => setSort(event.target.value)}
                 value={sort}
               >
@@ -147,7 +165,16 @@ function Listing() {
               </select>
             </label>
           </div>
-          {visible.length > 0 ? (
+          {isLoading ? (
+            <div className={styles.loadingState} role="status" aria-live="polite">
+              <span className={styles.spinner} aria-hidden="true" />
+              Loading {categoryName.toLowerCase()}...
+            </div>
+          ) : productState.error ? (
+            <div className={styles.emptyState} role="alert">
+              <p>Products couldn’t be loaded. Please try again.</p>
+            </div>
+          ) : visible.length > 0 ? (
             <div className={styles.productGrid}>
               {visible.map((item) => (
                 <ProductCard key={item.slug} product={item} />

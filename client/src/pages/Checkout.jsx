@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useCart, useCartDetails } from '../context/useCart.js'
+import { useScrollReveal } from '../hooks/useScrollReveal.js'
 import { createOrder } from '../data/orders.js'
 import { formatPrice } from '../utils/formatPrice.js'
 import styles from './Checkout.module.css'
@@ -102,6 +103,8 @@ const Checkout = () => {
   const navigate = useNavigate()
   const { clearCart } = useCart()
   const { lines, itemCount, subtotal } = useCartDetails()
+  const formRevealRef = useScrollReveal()
+  const summaryRevealRef = useScrollReveal()
 
   const [values, setValues] = useState(EMPTY_VALUES)
   const [errors, setErrors] = useState({})
@@ -188,7 +191,13 @@ const Checkout = () => {
       <h1>Checkout</h1>
 
       <div className={styles.layout}>
-        <form className={styles.form} onSubmit={handleSubmit} noValidate>
+        <form
+          className={styles.form}
+          data-scroll-reveal
+          onSubmit={handleSubmit}
+          noValidate
+          ref={formRevealRef}
+        >
           <h2>Delivery details</h2>
 
           <Field
@@ -281,7 +290,12 @@ const Checkout = () => {
           </button>
         </form>
 
-        <aside className={styles.summary} aria-label="Order summary">
+        <aside
+          aria-label="Order summary"
+          className={styles.summary}
+          data-scroll-reveal
+          ref={summaryRevealRef}
+        >
           <h2>Order summary</h2>
 
           <ul className={styles.lines}>

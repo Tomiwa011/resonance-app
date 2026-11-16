@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" fill="none">
+  <defs>
+    <linearGradient id="cabinet" x1="166" x2="434" y1="126" y2="385" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#34433a"/>
+      <stop offset="1" stop-color="#202923"/>
+    </linearGradient>
+    <filter id="shadow" width="1.5" height="1.5" x="-.25" y="-.2">
+      <feGaussianBlur stdDeviation="13"/>
+    </filter>
+  </defs>
+  <ellipse cx="300" cy="407" fill="#c9c7bd" filter="url(#shadow)" rx="170" ry="20"/>
+  <rect x="126" y="91" width="154" height="296" rx="13" fill="url(#cabinet)"/>
+  <rect x="320" y="91" width="154" height="296" rx="13" fill="url(#cabinet)"/>
+  <path d="M143 111h120v256H143zM337 111h120v256H337z" stroke="#718278" stroke-opacity=".6" stroke-width="2"/>
+  <circle cx="203" cy="176" r="28" fill="#a9c7ae"/>
+  <circle cx="203" cy="176" r="17" fill="#34433a"/>
+  <circle cx="203" cy="275" r="57" fill="#18211c" stroke="#76877b" stroke-width="5"/>
+  <circle cx="203" cy="275" r="35" fill="#425149" stroke="#a9c7ae" stroke-width="3"/>
+  <circle cx="397" cy="176" r="28" fill="#a9c7ae"/>
+  <circle cx="397" cy="176" r="17" fill="#34433a"/>
+  <circle cx="397" cy="275" r="57" fill="#18211c" stroke="#76877b" stroke-width="5"/>
+  <circle cx="397" cy="275" r="35" fill="#425149" stroke="#a9c7ae" stroke-width="3"/>
+  <circle cx="203" cy="275" r="8" fill="#a9c7ae"/>
+  <circle cx="397" cy="275" r="8" fill="#a9c7ae"/>
+  <path d="M169 356h68M363 356h68" stroke="#a9c7ae" stroke-linecap="round" stroke-width="3"/>
+</svg>

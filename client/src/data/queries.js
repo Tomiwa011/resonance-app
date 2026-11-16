@@ -1,16 +1,11 @@
 import { apiGet } from '../api/client.js'
 
-// Same function names as before, so the pages don't change.
-// Failures are logged and turned into "no data" so a page never hangs on "Loading...".
-
 export async function getProductsByCategory(category) {
-  try {
-    const products = await apiGet(`/products?category=${encodeURIComponent(category)}`)
-    return products ?? []
-  } catch (error) {
-    console.error('Could not load products', error)
-    return []
-  }
+  const path = category
+    ? `/products?category=${encodeURIComponent(category)}`
+    : '/products'
+  const products = await apiGet(path)
+  return products ?? []
 }
 
 export async function getProductBySlug(slug) {

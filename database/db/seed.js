@@ -7,7 +7,8 @@ const insertSql = `
      description, features, specs, in_the_box, images)
   VALUES
     ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
-  ON CONFLICT (slug) DO NOTHING
+  ON CONFLICT (slug) DO UPDATE
+  SET images = EXCLUDED.images
 `;
 
 async function seed() {
@@ -29,7 +30,7 @@ async function seed() {
         JSON.stringify(p.images),
       ]);
     }
-    console.log(`Seeded ${products.length} products.`);
+    console.log(`Seeded ${products.length} products and refreshed their image paths.`);
   } finally {
     await pool.end();
   }

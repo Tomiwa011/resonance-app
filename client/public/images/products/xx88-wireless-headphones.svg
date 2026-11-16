@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" fill="none">
+  <defs>
+    <linearGradient id="cup" x1="188" x2="412" y1="180" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#45534b"/>
+      <stop offset="1" stop-color="#202923"/>
+    </linearGradient>
+    <filter id="shadow" width="1.5" height="1.5" x="-.25" y="-.2">
+      <feGaussianBlur stdDeviation="13"/>
+    </filter>
+  </defs>
+  <ellipse cx="300" cy="374" fill="#c9c7bd" filter="url(#shadow)" rx="145" ry="23"/>
+  <path d="M170 263v-71c0-81 58-142 130-142s130 61 130 142v71" stroke="#202923" stroke-linecap="round" stroke-width="28"/>
+  <path d="M184 194c0-69 49-119 116-119s116 50 116 119v32" stroke="#718278" stroke-linecap="round" stroke-width="9"/>
+  <rect x="139" y="205" width="100" height="162" rx="38" fill="url(#cup)"/>
+  <rect x="153" y="220" width="72" height="132" rx="30" fill="#303a34"/>
+  <rect x="361" y="205" width="100" height="162" rx="38" fill="url(#cup)"/>
+  <rect x="375" y="220" width="72" height="132" rx="30" fill="#303a34"/>
+  <path d="M163 239c12-12 30-18 50-17M387 222c20-1 38 5 50 17" stroke="#9eaa9f" stroke-linecap="round" stroke-width="4"/>
+  <circle cx="189" cy="286" r="13" fill="#a9c7ae"/>
+  <path d="M187 286h4" stroke="#202923" stroke-linecap="round" stroke-width="3"/>
+  <path d="M200 351h-22" stroke="#718278" stroke-linecap="round" stroke-width="4"/>
+</svg>

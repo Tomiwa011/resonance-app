@@ -22,8 +22,20 @@ app.disable('x-powered-by');
 // looks like the same IP address and would share one rate limit.
 app.set('trust proxy', 1);
 
+const clientOrigins = new Set(config.clientOrigin ? [config.clientOrigin] : []);
 if (config.clientOrigin) {
-  app.use(cors({ origin: config.clientOrigin }));
+  const configuredOrigin = new URL(config.clientOrigin);
+  if (configuredOrigin.hostname === 'localhost') {
+    configuredOrigin.hostname = '127.0.0.1';
+    clientOrigins.add(configuredOrigin.origin);
+  } else if (configuredOrigin.hostname === '127.0.0.1') {
+    configuredOrigin.hostname = 'localhost';
+    clientOrigins.add(configuredOrigin.origin);
+  }
+}
+
+if (clientOrigins.size) {
+  app.use(cors({ origin: [...clientOrigins] }));
 }
 
 app.use(express.json({ limit: '10kb' }));

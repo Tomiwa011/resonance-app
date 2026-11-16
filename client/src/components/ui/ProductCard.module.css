@@ -6,7 +6,6 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  text-decoration: none;
   transition:
     box-shadow 180ms ease,
     transform 180ms ease;
@@ -15,6 +14,12 @@
 .card:hover {
   box-shadow: 0 8px 24px rgb(34 33 31 / 10%);
   transform: translateY(-2px);
+}
+
+.productLink {
+  color: inherit;
+  flex: 1;
+  text-decoration: none;
 }
 
 .imageBox {
@@ -60,8 +65,8 @@
 }
 
 .name {
-  font-size: 19px;
-  margin: 8px 0 18px;
+  font-size: 18px;
+  margin: 8px 0 14px;
 }
 
 .meta {
@@ -82,4 +87,67 @@
 
 .rating span {
   color: #b3873c;
+}
+
+.stock,
+.outOfStock {
+  font-size: 11px;
+  margin: 12px 0 0;
+}
+
+.stock {
+  color: var(--accent);
+}
+
+.outOfStock {
+  color: #8d554d;
+}
+
+.quickAdd {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--text);
+  border-radius: 4px;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  justify-content: space-between;
+  margin: 0 20px 20px;
+  min-height: 42px;
+  padding: 0 12px;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.quickAdd:hover:not(:disabled) {
+  background: var(--text);
+  color: #fff;
+}
+
+.quickAdd:focus-visible,
+.productLink:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.quickAdd:disabled {
+  border-color: var(--border);
+  color: #77756f;
+  cursor: not-allowed;
+}
+
+.quickAdd span {
+  font-size: 18px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .quickAdd {
+    transition: none;
+  }
 }

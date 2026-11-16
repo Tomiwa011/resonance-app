@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ProductCard from "../components/ui/ProductCard.jsx";
 import { useCart } from "../context/useCart.js";
+import { useScrollReveal } from "../hooks/useScrollReveal.js";
 import { getProductBySlug, getRelatedProducts } from "../data/queries.js";
 import { formatPrice } from "../utils/formatPrice.js";
 import styles from "./Product.module.css";
@@ -9,6 +10,9 @@ import styles from "./Product.module.css";
 function Product() {
   const { slug } = useParams();
   const { addItem, openCart } = useCart();
+  const topSectionRef = useScrollReveal();
+  const informationRef = useScrollReveal();
+  const relatedRef = useScrollReveal();
   const [productState, setProductState] = useState(() => ({
     slug,
     product: null,
@@ -89,7 +93,7 @@ function Product() {
 
   return (
     <div className={styles.page}>
-      <section className={styles.topSection}>
+      <section className={styles.topSection} data-scroll-reveal ref={topSectionRef}>
         <div className={styles.gallery}>
           <div className={styles.mainImageBox}>
             <img
@@ -167,7 +171,12 @@ function Product() {
         </div>
       </section>
 
-      <section className={styles.information} aria-label="Product information">
+      <section
+        aria-label="Product information"
+        className={styles.information}
+        data-scroll-reveal
+        ref={informationRef}
+      >
         <div
           className={styles.tabList}
           role="tablist"
@@ -225,7 +234,7 @@ function Product() {
       </section>
 
       {relatedProducts.length > 0 && (
-        <section className={styles.related}>
+        <section className={styles.related} data-scroll-reveal ref={relatedRef}>
           <h2>Pairs well with</h2>
           <div className={styles.relatedGrid}>
             {relatedProducts.map((item) => (
