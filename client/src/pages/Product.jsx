@@ -9,7 +9,7 @@ import styles from "./Product.module.css";
 
 function Product() {
   const { slug } = useParams();
-  const { addItem, openCart } = useCart();
+  const { addItem } = useCart();
   const topSectionRef = useScrollReveal();
   const informationRef = useScrollReveal();
   const relatedRef = useScrollReveal();
@@ -60,7 +60,6 @@ function Product() {
 
   function handleAddToCart() {
     addItem(product.id, quantity,product.stock);
-    openCart();
   }
 
   if (loading) {

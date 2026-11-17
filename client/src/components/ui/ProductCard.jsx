@@ -5,12 +5,11 @@ import { formatPrice } from '../../utils/formatPrice'
 import styles from './ProductCard.module.css'
 
 function ProductCard({ product }) {
-  const { addItem, openCart } = useCart()
+  const { addItem } = useCart()
   const revealRef = useScrollReveal()
 
   function handleQuickAdd() {
     addItem(product.id, 1, product.stock)
-    openCart()
   }
 
   return (
