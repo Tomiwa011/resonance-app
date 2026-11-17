@@ -154,6 +154,23 @@
   padding: 20px 24px 24px;
 }
 
+.clearButton {
+  background: transparent;
+  border: 0;
+  color: #77756f;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  margin-bottom: 16px;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.clearButton:hover {
+  color: var(--text);
+}
+
 .subtotal {
   display: flex;
   justify-content: space-between;

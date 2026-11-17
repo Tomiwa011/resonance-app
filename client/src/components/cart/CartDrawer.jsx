@@ -5,7 +5,7 @@ import { useCart, useCartDetails } from '../../context/useCart'
 import styles from './CartDrawer.module.css'
 
 function CartDrawer() {
-  const { isOpen, closeCart, setQuantity, removeItem } = useCart()
+  const { isOpen, closeCart, setQuantity, removeItem, clearCart } = useCart()
   const { lines, isLoading, itemCount, subtotal } = useCartDetails()
   const closeButtonRef = useRef(null)
 
@@ -124,6 +124,13 @@ function CartDrawer() {
             </ul>
 
             <footer className={styles.footer}>
+              <button
+                className={styles.clearButton}
+                onClick={clearCart}
+                type="button"
+              >
+                Clear cart
+              </button>
               <div className={styles.subtotal}>
                 <span>Subtotal</span>
                 <strong>{formatPrice(subtotal)}</strong>
